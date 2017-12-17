@@ -21,3 +21,7 @@
 - (void)updateIndex:(NSInteger) index;
 - (void)reload:(SwipeMenuViewConfig *) config;
 @end
+
+@interface ContentScrollView(Extend)
+- (void)jumpToIndex:(NSInteger) index animated:(BOOL) animated;
+@end

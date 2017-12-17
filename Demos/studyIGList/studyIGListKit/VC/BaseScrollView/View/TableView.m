@@ -40,7 +40,7 @@
     [self setNeedsLayout];
     [self layoutIfNeeded];
     
-    [self setContentSize:CGSizeMake(CGRectGetMaxX(self.itemsM.lastObject.frame), self.bounds.size.height)];
+    [self setContentSize:CGSizeMake(CGRectGetMaxX(self.itemsM.lastObject.frame) + self.config.margin, self.frame.size.height)];
 }
 
 - (void)updateToIndex:(NSInteger) index {
@@ -83,6 +83,7 @@
         
         [self.itemsM addObject:item];
         [self addSubview:item];
+
         pointX += size.width + self.config.margin;
     }
 }
@@ -104,13 +105,24 @@
     self.bouncesZoom = NO;
 }
 
+- (void)animateUnderlineViewIndex:(NSInteger) index completion:(void (^)(BOOL finished))completionBlock {
+    [self updateToIndex:index];
+    [UIView animateWithDuration:0.25 animations:^{
+        CGRect underFrame = self.underlineView.frame;
+        underFrame.origin.x = self.currentItem.frame.origin.x;
+        underFrame.size.width = self.currentItem.frame.size.width - 2 * self.config.underlineMargin;
+        self.underlineView.frame = underFrame;
+        
+    } completion:completionBlock];
+}
+
 - (void)focusonTarget:(UIView *) target animated:(BOOL) animated {
-    CGFloat offset = target.center.x - self.frame.size.width / 2 + self.config.margin;
-    CGFloat contentWidth = self.frame.size.width + self.config.margin * 2;
+    CGFloat offset = target.center.x - self.frame.size.width / 2 + self.config.underlineMargin;
+    CGFloat contentWidth = self.contentSize.width + self.config.underlineMargin * 2;
     
     if (offset < 0 || self.frame.size.width > contentWidth) {
         [self setContentOffset:CGPointMake(0, 0) animated:animated];
-    } else if (contentWidth - self.frame.size.width < offset) {
+    } else if (contentWidth - offset < self.frame.size.width) {
         [self setContentOffset:CGPointMake(contentWidth - self.frame.size.width, 0) animated:animated];
     } else {
         [self setContentOffset:CGPointMake(offset, 0) animated:animated];
@@ -142,7 +154,9 @@
     [self focusonTarget:self.underlineView animated:NO];
 }
 
-
+- (NSMutableArray *)tabItemViews {
+    return self.itemsM;
+}
 
 - (UIView *)underlineView {
     if (nil == _underlineView) {
@@ -159,6 +173,9 @@
     return _itemsM;
 }
 @end
+
+
+
 
 @implementation TableView(Extend)
 - (void)jumpToIndex:(NSInteger) index {

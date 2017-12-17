@@ -13,6 +13,7 @@ typedef NS_ENUM(NSInteger, Direction) {
 };
 
 @class TableView;
+@class TableItemView;
 @class SwipeMenuViewConfig;
 @protocol TableViewDelegate <NSObject>
 
@@ -23,7 +24,9 @@ typedef NS_ENUM(NSInteger, Direction) {
 
 @interface TableView : UIScrollView
 @property (nonatomic, weak) id<TableViewDelegate> dataSource;
+@property (nonatomic, strong, readonly) NSMutableArray *tabItemViews;
 - (void)reload:(SwipeMenuViewConfig *) config;
 - (void)updateToIndex:(NSInteger) index;
+- (void)animateUnderlineViewIndex:(NSInteger) index completion:(void (^)(BOOL finished))completionBlock;
 - (void)moveUnderlineViewIndex:(NSInteger) index ratio:(CGFloat) ratio direction:(Direction) direction;
 @end

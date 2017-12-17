@@ -9,7 +9,7 @@
 #import "One2TwoViewController.h"
 #import "SwipeMenuView.h"
 #import "SwipeMenuViewConfig.h"
-@interface One2TwoViewController ()<SwipeMenuViewDelegate>
+@interface One2TwoViewController ()<SwipeMenuViewDataSource, SwipeMenuViewDelegate>
 @property (nonatomic, strong) SwipeMenuView *menuView;
 @property (nonatomic, strong) NSArray *titles;
 @property (nonatomic, strong) NSArray *contentsInfo;
@@ -25,8 +25,8 @@
     self.arrayM = [NSMutableArray array];
     
     self.config = [SwipeMenuViewConfig new];
-    self.config.selectFont = 16;
-    self.config.textFont = 14;
+    self.config.selectFont = 18;
+    self.config.textFont = 18;
     self.config.margin = 15;
     self.config.textColor = [UIColor greenColor];
     self.config.selectedTextColor = [UIColor blackColor];
@@ -62,11 +62,20 @@
     return vc.view;
 }
 
+- (void)swipeMenuView:(SwipeMenuView *) swipeMenuView willChangeIndexFrom:(NSInteger) fromIndex toIndex:(NSInteger) toIndex {
+    NSLog(@"%s   \n willChangeIndexFrom fromIndex = %zd  toIndex = %zd", __func__, fromIndex, toIndex);
+}
+
+- (void)swipeMenuView:(SwipeMenuView *) swipeMenuView didChangeIndexFrom:(NSInteger) fromIndex toIndex:(NSInteger) toIndex {
+    NSLog(@"%s   \n didChangeIndexFrom fromIndex = %zd  toIndex = %zd", __func__, fromIndex, toIndex);
+}
+
 
 - (SwipeMenuView *)menuView {
     if (nil == _menuView) {
         _menuView = [[SwipeMenuView alloc] init];
         _menuView.dataSource = self;
+        _menuView.delegate = self;
         [self.view addSubview:_menuView];
     }
     return _menuView;
@@ -74,11 +83,11 @@
 - (NSArray *)titles {
     if (nil == _titles) {
         _titles = @[
-                    @"123",
-                    @"12345",
-                    @"1234",
-                    @"12",
-                    @"123",
+                    @"aaaaaaaaa",
+                    @"bbbbbb",
+                    @"ccccccccc",
+                    @"ddddddddddddd",
+                    @"eeeeeeeee",
                     ];
     }
     return _titles;
