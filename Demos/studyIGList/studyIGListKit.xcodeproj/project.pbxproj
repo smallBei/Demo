@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		331BA0AC1FE7E8D100EF9AF6 /* DDAlreadyPaidListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 331BA0AB1FE7E8D000EF9AF6 /* DDAlreadyPaidListVC.m */; };
 		33427A0B1FE39196007E0FEA /* PageBaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 33427A0A1FE39196007E0FEA /* PageBaseVC.m */; };
 		33427A0E1FE39839007E0FEA /* SwipeMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33427A0D1FE39839007E0FEA /* SwipeMenuView.m */; };
 		33427A111FE398A3007E0FEA /* TableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33427A101FE398A3007E0FEA /* TableView.m */; };
@@ -46,6 +47,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		331BA0AA1FE7E8D000EF9AF6 /* DDAlreadyPaidListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDAlreadyPaidListVC.h; sourceTree = "<group>"; };
+		331BA0AB1FE7E8D000EF9AF6 /* DDAlreadyPaidListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDAlreadyPaidListVC.m; sourceTree = "<group>"; };
 		33427A091FE39196007E0FEA /* PageBaseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageBaseVC.h; sourceTree = "<group>"; };
 		33427A0A1FE39196007E0FEA /* PageBaseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageBaseVC.m; sourceTree = "<group>"; };
 		33427A0C1FE39839007E0FEA /* SwipeMenuView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwipeMenuView.h; sourceTree = "<group>"; };
@@ -260,6 +263,8 @@
 				33A851211FE2270300F43B78 /* EmptyViewController.m */,
 				33C4C1991FE24D55006F31ED /* One2TwoViewController.h */,
 				33C4C19A1FE24D55006F31ED /* One2TwoViewController.m */,
+				331BA0AA1FE7E8D000EF9AF6 /* DDAlreadyPaidListVC.h */,
+				331BA0AB1FE7E8D000EF9AF6 /* DDAlreadyPaidListVC.m */,
 				33427A011FE3670D007E0FEA /* BaseScrollView */,
 			);
 			path = VC;
@@ -446,6 +451,7 @@
 				33427A141FE3A6FE007E0FEA /* TableItemView.m in Sources */,
 				33D8758B1FE126140008C2B0 /* UserItem.m in Sources */,
 				33A851281FE22BD000F43B78 /* RemoveCell.m in Sources */,
+				331BA0AC1FE7E8D100EF9AF6 /* DDAlreadyPaidListVC.m in Sources */,
 				33427A171FE3BF36007E0FEA /* ContentScrollView.m in Sources */,
 				33D875791FE10D650008C2B0 /* LableSectionController.m in Sources */,
 				33A8511C1FE21F7200F43B78 /* EmbeddedCell.m in Sources */,

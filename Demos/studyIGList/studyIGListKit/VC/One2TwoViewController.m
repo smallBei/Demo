@@ -9,7 +9,9 @@
 #import "One2TwoViewController.h"
 #import "SwipeMenuView.h"
 #import "SwipeMenuViewConfig.h"
-@interface One2TwoViewController ()<SwipeMenuViewDataSource, SwipeMenuViewDelegate>
+#import "DDAlreadyPaidListVC.h"
+
+@interface One2TwoViewController ()<SwipeMenuViewDataSource, SwipeMenuViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) SwipeMenuView *menuView;
 @property (nonatomic, strong) NSArray *titles;
 @property (nonatomic, strong) NSArray *contentsInfo;
@@ -21,8 +23,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.view setBackgroundColor:[UIColor lightGrayColor]];
-    self.arrayM = [NSMutableArray array];
+    
+    self.navigationController.navigationBar.prefersLargeTitles = YES;
+    self.navigationItem.largeTitleDisplayMode = UINavigationItemLargeTitleDisplayModeAutomatic;
+    
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(oncick)];
+//    [self.navigationItem setRightBarButtonItem:item];
+    
+    
+//    [self.view setBackgroundColor:[UIColor lightGrayColor]];
     
     self.config = [SwipeMenuViewConfig new];
     self.config.selectFont = 18;
@@ -31,8 +40,15 @@
     self.config.textColor = [UIColor greenColor];
     self.config.selectedTextColor = [UIColor blackColor];
     
-    self.config.tableViewHeight = 55;
-    self.config.contenViewHeight = 350;
+//    self.config.tableViewHeight = 55;
+    self.config.contenViewHeight = self.view.bounds.size.height;
+    
+    DDAlreadyPaidListVC *vc = [[DDAlreadyPaidListVC alloc] init];
+    [self addChildViewController:vc];
+}
+
+- (void)oncick {
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -47,6 +63,18 @@
     self.menuView.frame = frame;
 }
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 50;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:0 reuseIdentifier:@"UITableViewCell"];
+    }
+    return cell;
+}
+
+
 - (NSInteger)numberOfPages:(SwipeMenuView *) swipeMenuView {
     return self.titles.count;
 }
@@ -56,10 +84,7 @@
 }
 
 - (UIView *)swipeMenuView:(SwipeMenuView *)swipeMenuView viewControllerForPageAt:(NSInteger) index {
-    UIViewController *vc = [[UIViewController alloc] init];
-    [self.arrayM addObject:vc];
-    [vc.view setBackgroundColor:self.contentsInfo[index]];
-    return vc.view;
+    return self.childViewControllers[index].view;
 }
 
 - (void)swipeMenuView:(SwipeMenuView *) swipeMenuView willChangeIndexFrom:(NSInteger) fromIndex toIndex:(NSInteger) toIndex {
@@ -84,10 +109,6 @@
     if (nil == _titles) {
         _titles = @[
                     @"aaaaaaaaa",
-                    @"bbbbbb",
-                    @"ccccccccc",
-                    @"ddddddddddddd",
-                    @"eeeeeeeee",
                     ];
     }
     return _titles;
